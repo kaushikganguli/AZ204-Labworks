@@ -2,7 +2,7 @@ CLI Commands:
 
 webappname=mywebapp$RANDOM
 az group create --location westeurope --name myResourceGroup
-az appservice plan create --name KaushikWebApp13112021_1 --resource-group myResourceGroup --sku FREE
+az appservice plan create --name $webappname --resource-group myResourceGroup --sku FREE
 az webapp create --name $webappname --resource-group myResourceGroup --plan $webappname
 gitrepo=https://github.com/Azure-Samples/php-docs-hello-world
 az webapp deployment source config --name $webappname --resource-group myResourceGroup --repo-url $gitrepo --branch master --manual-integration
