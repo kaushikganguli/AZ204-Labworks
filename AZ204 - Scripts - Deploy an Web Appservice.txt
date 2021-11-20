@@ -1,0 +1,28 @@
+CLI Commands:
+
+webappname=mywebapp$RANDOM
+az group create --location westeurope --name myResourceGroup
+az appservice plan create --name KaushikWebApp13112021_1 --resource-group myResourceGroup --sku FREE
+az webapp create --name $webappname --resource-group myResourceGroup --plan $webappname
+gitrepo=https://github.com/Azure-Samples/php-docs-hello-world
+az webapp deployment source config --name $webappname --resource-group myResourceGroup --repo-url $gitrepo --branch master --manual-integration
+
+
+PowerShell Commands:
+
+$webappname="mywebapp$(Get-Random)"
+$location="West Europe"
+New-AzResourceGroup -Name myResourceGroup -Location $location
+
+New-AzAppServicePlan -Name $webappname -Location $location -ResourceGroupName myResourceGroup -Tier Free
+
+New-AzWebApp -Name $webappname -Location $location -ResourceGroupName myResourceGroup -AppServicePlan $webappname
+
+$gitrepo=https://github.com/Azure-Samples/app-service-web-dotnet-get-started.git
+$PropertiesObject=@{
+repoUrl = "$gitrepo";
+branch="master";
+isManualIntegration = "true";
+}
+Set-AzResource -PropertyObject $PropertiesObject -ResourceGroupName myResourceGroup -ResourceType Microsoft.Web/sites/sourcecontrols -ResourceName $webappname/web -ApiVersion 2015-08-01 -Force
+
